@@ -8,7 +8,7 @@ homebrew="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
 defaults write com.apple.finder AppleShowAllFiles YES
 
-if [ -d sadasda ] ; then
+if [ ! -d ”/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home” ] ; then
     curl -fsSLjkO -H "Cookie: oraclelicense=accept-securebackup-cookie" "${java_sdk}"
     hdiutil mount ${java_sdk##*/}
     sudo installer -package "/Volumes/JDK 8 Update 25/JDK 8 Update 25.pkg" -target "/Volumes/Macintosh HD"
@@ -16,7 +16,7 @@ if [ -d sadasda ] ; then
     rm -f ${java_sdk##*/}
 
     echo 'export JAVA_HOME=$(/usr/libexec/java_home)' >> ${HOME}/.bash_profile
-    source /etc/launchd.conf
+    source ${HOME}/.bash_profile
 fi
 
 if [ ! -d "${HOME}/android-sdk-macosx" ] ; then
