@@ -8,7 +8,7 @@ homebrew="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
 defaults write com.apple.finder AppleShowAllFiles YES
 
-if [ ! -d ”/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home” ] ; then
+if [ ! -d "/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home" ] ; then
     curl -fsSLjkO -H "Cookie: oraclelicense=accept-securebackup-cookie" "${java_sdk}"
     hdiutil mount ${java_sdk##*/}
     sudo installer -package "/Volumes/JDK 8 Update 25/JDK 8 Update 25.pkg" -target "/Volumes/Macintosh HD"
@@ -52,7 +52,7 @@ if [ ! -x /usr/local/bin/brew ] ; then
     brew doctor
 fi
 
-if [ -d ${HOME}/.npm-packages ] ; then
+if [ ! -d ${HOME}/.npm-packages ] ; then
     echo 'NPM_PACKAGES="${HOME}/.npm-packages"' >> ${HOME}/.bash_profile
     echo 'PATH=${PATH}:${NPM_PACKAGES}/bin' >> ${HOME}/.bash_profile
     echo 'NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"' >> ${HOME}/.bash_profile
