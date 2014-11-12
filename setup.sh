@@ -8,10 +8,6 @@ homebrew="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
 defaults write com.apple.finder AppleShowAllFiles YES
 
-if [ ! -x /usr/local/bin/brew ] ; then
-	echo y | ruby -e "$(curl -fsSL ${homebrew})"
-fi
-
 if [ -d sadasda ] ; then
     curl -fsSLjkO -H "Cookie: oraclelicense=accept-securebackup-cookie" "${java_sdk}"
     hdiutil mount ${java_sdk##*/}
@@ -19,7 +15,7 @@ if [ -d sadasda ] ; then
     hdiutil unmount "/Volumes/JDK 8 Update 25/"
     rm -f ${java_sdk##*/}
 
-    sudo sh -c "echo \'export JAVA_HOME=$(/usr/libexec/java_home)\' >> /etc/launchd.conf"
+    echo 'export JAVA_HOME=$(/usr/libexec/java_home)' >> ${HOME}/.bash_profile
     source /etc/launchd.conf
 fi
 
@@ -49,3 +45,21 @@ fi
 if [ `android list avd | wc -l` -le 1 ] ; then
     android -s create avd -n default-19 -t android-19 -b default/x86 -d "${android_device}"
 fi
+
+if [ ! -x /usr/local/bin/brew ] ; then
+    echo y | ruby -e "$(curl -fsSL ${homebrew})"
+    brew update
+    brew doctor
+fi
+
+if [ -d ${HOME}/.npm-packages ] ; then
+    echo 'NPM_PACKAGES="${HOME}/.npm-packages"' >> ${HOME}/.bash_profile
+    echo 'PATH=${PATH}:${NPM_PACKAGES}/bin' >> ${HOME}/.bash_profile
+    echo 'NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"' >> ${HOME}/.bash_profile
+    echo 'prefix=${HOME}/.npm-packages' >> ${HOME}/.npmrc
+    source ${HOME}/.bash_profile
+
+    brew install node ant
+    npm install -g bower grunt-cli yo cordova generator-angularjs-cordova ios-sim
+fi
+
