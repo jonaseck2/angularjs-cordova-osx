@@ -60,6 +60,6 @@ if [ ! -d ${HOME}/.npm-packages ] ; then
     source ${HOME}/.bash_profile
 
     brew install node ant
-    npm install -g bower grunt-cli yo cordova generator-angularjs-cordova ios-sim
+    npm install -g bower grunt-cli yo cordova generator-angularjs-cordova ios-sim ios-deploy
 fi
 
