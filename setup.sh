@@ -53,9 +53,9 @@ if [ ! -x /usr/local/bin/brew ] ; then
 fi
 
 if [ ! -d ${HOME}/.npm-packages ] ; then
-    echo 'NPM_PACKAGES="${HOME}/.npm-packages"' >> ${HOME}/.bash_profile
-    echo 'PATH=${PATH}:${NPM_PACKAGES}/bin' >> ${HOME}/.bash_profile
-    echo 'NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"' >> ${HOME}/.bash_profile
+    echo 'export NPM_PACKAGES="${HOME}/.npm-packages"' >> ${HOME}/.bash_profile
+    echo 'export PATH=${PATH}:${NPM_PACKAGES}/bin' >> ${HOME}/.bash_profile
+    echo 'export NODE_PATH="${NPM_PACKAGES}/lib/node_modules:${NODE_PATH}"' >> ${HOME}/.bash_profile
     echo 'prefix=${HOME}/.npm-packages' >> ${HOME}/.npmrc
     source ${HOME}/.bash_profile
 
