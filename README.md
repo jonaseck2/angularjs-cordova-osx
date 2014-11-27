@@ -7,6 +7,7 @@ The aim is to get an environment that is fully configured. If any additional con
 
 # Requirements
 xcode 1.6
+xcode command line tools
 
 # Disclaimer: 
 By installing this you are accepting oracle license jdk-8u25-oth-JPR. see http://www.oracle.com/technetwork/java/javase/terms/license/index.html
@@ -20,9 +21,8 @@ By installing this you are accepting oracle license jdk-8u25-oth-JPR. see http:/
 - Enables showing hidden files and folders
 - Ant
 - node
-- npm packages bower grunt-cli yo cordova generator-angularjs-cordova ios-sim
-
-All software is installed locally except java, brew and node. Node is configured to install global packages in your home directory.
+- npm packages bower grunt-cli yo cordova generator-angularjs-cordova ios-sim ios-deploy
+- ipa https://github.com/nomad/shenzhen
 
 # Instructions
 clone this repository and execute the script. Enter your user password when prompted
@@ -53,10 +53,27 @@ cordova emulate android
 cordova run android 
 ```
 ## IOS emulation or device deploy
+For device deploy, open the platforms/ios/<appname>.xcodeproj project in xcode and ensure that a provisioning profile is configured for the project.
 ```
 grunt build
-cordova emulate ios 
-cordova run ios 
+cordova emulate ios
+cordova run ios
 ```
+
+### IOS testflight distribution
+```
+grunt build
+cordova build ios --release
+cd platforms/ios
+ipa distribute
+API Token:
+<enter your api token from https://testflightapp.com/account>
+Team Token:
+<enter your api token from https://testflightapp.com/dashboard/team/edit>
+What's new in this release:
+<Replace with release message>
+```
+
+
 
 License: MIT
