@@ -65,6 +65,6 @@ fi
 
 if [ ! -x /usr/bin/ipa ] ; then
     ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future sudo gem install json
-    LC_ALL="en_US.UTF-8"
+    LC_ALL="en_US.ASCII-8BIT"
     sudo gem install shenzhen
 fi
